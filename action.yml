@@ -1,13 +1,26 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: '"Create Tag" Action for GitHub Actions'
+description: 'GitHub Action to create a git tag'
+author: "ydataai"
+branding:
+  icon: 'tag'
+  color: 'red'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  github_token:
+    description: 'The GitHub token to use (if not provided GITHUB_TOKEN will be use instead)'
+    default: ${{ github.token }}
+    required: false
+  sha:
+    description: 'The sha of the commit to tag'
+    required: false
+  tag:
+    description: 'The tag name'
     required: true
-    default: '1000'
+  message:
+    description: 'The tag message'
+    required: true
 outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+  ref:
+    description: 'The tag reference'
 runs:
   using: 'node16'
   main: 'dist/index.js'
